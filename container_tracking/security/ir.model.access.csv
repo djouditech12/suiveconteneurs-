@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_container_tracking_user,container.tracking.user,model_container_tracking,group_container_user,1,1,1,0
+access_container_tracking_manager,container.tracking.manager,model_container_tracking,group_container_manager,1,1,1,1
+access_container_tracking_line_user,container.tracking.line.user,model_container_tracking_line,group_container_user,1,1,1,1
+access_container_tracking_line_manager,container.tracking.line.manager,model_container_tracking_line,group_container_manager,1,1,1,1

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== FORM ===================== -->
+    <record id="container_tracking_view_form" model="ir.ui.view">
+        <field name="name">container.tracking.form</field>
+        <field name="model">container.tracking</field>
+        <field name="arch" type="xml">
+            <form string="Conteneur">
+                <header>
+                    <button name="action_set_arrived" type="object"
+                            string="Marquer comme arrivé" class="btn-primary"
+                            invisible="state == 'arrived'"/>
+                    <button name="action_set_in_transit" type="object"
+                            string="Remettre en route"
+                            invisible="state == 'in_transit'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="in_transit,arrived"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="En retard" bg_color="text-bg-danger"
+                            invisible="not is_late"/>
+                    <widget name="web_ribbon" title="Arrivé" bg_color="text-bg-success"
+                            invisible="state != 'arrived'"/>
+                    <field name="is_late" invisible="1"/>
+                    <field name="company_id" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Ex : MSKU1234567"/></h1>
+                    </div>
+                    <group>
+                        <group string="Dates">
+                            <field name="departure_date"/>
+                            <field name="expected_arrival_date"/>
+                            <field name="actual_arrival_date"
+                                   invisible="state != 'arrived'"/>
+                        </group>
+                        <group string="Résumé">
+                            <field name="transit_days"/>
+                            <field name="days_left" invisible="state == 'arrived'"/>
+                            <field name="qty_bags"/>
+                            <field name="qty_shoes"/>
+                            <field name="total_qty" class="fw-bold"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contenu" name="content">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_type"/>
+                                    <field name="description"/>
+                                    <field name="quantity" sum="Total"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Remarques, transitaire, n° de BL..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ===================== LIST ===================== -->
+    <record id="container_tracking_view_list" model="ir.ui.view">
+        <field name="name">container.tracking.list</field>
+        <field name="model">container.tracking</field>
+        <field name="arch" type="xml">
+            <list string="Conteneurs"
+                  decoration-success="state == 'arrived'"
+                  decoration-danger="is_late"
+                  decoration-info="state == 'in_transit' and not is_late">
+                <field name="name"/>
+                <field name="departure_date"/>
+                <field name="expected_arrival_date"/>
+                <field name="actual_arrival_date" optional="show"/>
+                <field name="days_left" optional="show"/>
+                <field name="qty_bags" sum="Total sacs" optional="show"/>
+                <field name="qty_shoes" sum="Total chaussures" optional="show"/>
+                <field name="total_qty" sum="Total pcs"/>
+                <field name="state" widget="badge"
+                       decoration-info="state == 'in_transit'"
+                       decoration-success="state == 'arrived'"/>
+                <field name="is_late" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ===================== KANBAN ===================== -->
+    <record id="container_tracking_view_kanban" model="ir.ui.view">
+        <field name="name">container.tracking.kanban</field>
+        <field name="model">container.tracking</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" group_create="0"
+                    class="o_kanban_mobile" sample="1">
+                <field name="color"/>
+                <field name="is_late"/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <main class="ps-2">
+                            <div class="d-flex justify-content-between">
+                                <field name="name" class="fw-bold fs-5"/>
+                                <span t-if="record.is_late.raw_value"
+                                      class="badge text-bg-danger">En retard</span>
+                            </div>
+                            <div class="text-muted">
+                                <i class="fa fa-ship me-1" title="Départ"/>
+                                <field name="departure_date"/>
+                                <i class="fa fa-long-arrow-right mx-1"/>
+                                <field name="expected_arrival_date"/>
+                            </div>
+                            <div class="mt-1">
+                                <span class="me-3">
+                                    <i class="fa fa-shopping-bag me-1" title="Sacs"/><field name="qty_bags"/>
+                                </span>
+                                <span>
+                                    <i class="fa fa-shopping-cart me-1" title="Chaussures"/><field name="qty_shoes"/>
+                                </span>
+                            </div>
+                            <div class="mt-1 fw-bold">
+                                Total : <field name="total_qty"/> pcs
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- ===================== CALENDAR ===================== -->
+    <record id="container_tracking_view_calendar" model="ir.ui.view">
+        <field name="name">container.tracking.calendar</field>
+        <field name="model">container.tracking</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendrier des conteneurs"
+                      date_start="departure_date"
+                      date_stop="expected_arrival_date"
+                      color="state"
+                      mode="month"
+                      quick_create="0">
+                <field name="name"/>
+                <field name="state"/>
+                <field name="total_qty"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- ===================== SEARCH ===================== -->
+    <record id="container_tracking_view_search" model="ir.ui.view">
+        <field name="name">container.tracking.search</field>
+        <field name="model">container.tracking</field>
+        <field name="arch" type="xml">
+            <search string="Rechercher un conteneur">
+                <field name="name" string="N° de conteneur"/>
+                <field name="line_ids" string="Contenu (description)"
+                       filter_domain="[('line_ids.description', 'ilike', self)]"/>
+                <field name="notes"/>
+                <separator/>
+                <filter name="filter_in_transit" string="En route"
+                        domain="[('state', '=', 'in_transit')]"/>
+                <filter name="filter_arrived" string="Arrivé"
+                        domain="[('state', '=', 'arrived')]"/>
+                <separator/>
+                <filter name="filter_late" string="En retard"
+                        domain="[('state', '=', 'in_transit'), ('expected_arrival_date', '&lt;', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_has_bags" string="Contient des sacs"
+                        domain="[('qty_bags', '&gt;', 0)]"/>
+                <filter name="filter_has_shoes" string="Contient des chaussures"
+                        domain="[('qty_shoes', '&gt;', 0)]"/>
+                <separator/>
+                <filter name="filter_departure_date" string="Date de départ"
+                        date="departure_date"/>
+                <filter name="filter_expected_date" string="Arrivée prévue"
+                        date="expected_arrival_date"/>
+                <filter name="filter_actual_date" string="Arrivée réelle"
+                        date="actual_arrival_date"/>
+                <group>
+                    <filter name="group_state" string="Statut"
+                            context="{'group_by': 'state'}"/>
+                    <filter name="group_departure_month" string="Mois de départ"
+                            context="{'group_by': 'departure_date:month'}"/>
+                    <filter name="group_expected_month" string="Mois d'arrivée prévue"
+                            context="{'group_by': 'expected_arrival_date:month'}"/>
+                    <filter name="group_expected_week" string="Semaine d'arrivée prévue"
+                            context="{'group_by': 'expected_arrival_date:week'}"/>
+                    <filter name="group_actual_month" string="Mois d'arrivée réelle"
+                            context="{'group_by': 'actual_arrival_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ===================== ACTION ===================== -->
+    <record id="container_tracking_action" model="ir.actions.act_window">
+        <field name="name">Conteneurs</field>
+        <field name="res_model">container.tracking</field>
+        <field name="view_mode">kanban,list,calendar,form</field>
+        <field name="search_view_id" ref="container_tracking_view_search"/>
+        <field name="context">{'search_default_filter_in_transit': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Ajoutez votre premier conteneur</p>
+            <p>Suivez vos conteneurs depuis leur départ de Chine jusqu'à leur arrivée.</p>
+        </field>
+    </record>
+
+</odoo>
