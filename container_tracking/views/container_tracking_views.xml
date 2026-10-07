@@ -35,6 +35,11 @@
                             <field name="actual_arrival_date"
                                    invisible="state != 'arrived'"/>
                         </group>
+                        <group string="Logistique">
+                            <field name="partner_id"/>
+                            <field name="forwarder_id"/>
+                            <field name="port"/>
+                        </group>
                         <group string="Résumé">
                             <field name="transit_days"/>
                             <field name="days_left" invisible="state == 'arrived'"/>
@@ -76,6 +81,9 @@
                 <field name="departure_date"/>
                 <field name="expected_arrival_date"/>
                 <field name="actual_arrival_date" optional="show"/>
+                <field name="partner_id" optional="show"/>
+                <field name="forwarder_id" optional="hide"/>
+                <field name="port" optional="hide"/>
                 <field name="days_left" optional="show"/>
                 <field name="qty_bags" sum="Total sacs" optional="show"/>
                 <field name="qty_shoes" sum="Total chaussures" optional="show"/>
@@ -97,6 +105,8 @@
                     class="o_kanban_mobile" sample="1">
                 <field name="color"/>
                 <field name="is_late"/>
+                <field name="partner_id"/>
+                <field name="port"/>
                 <templates>
                     <t t-name="card" class="flex-row">
                         <main class="ps-2">
@@ -110,6 +120,12 @@
                                 <field name="departure_date"/>
                                 <i class="fa fa-long-arrow-right mx-1"/>
                                 <field name="expected_arrival_date"/>
+                            </div>
+                            <div t-if="record.partner_id.raw_value" class="text-muted">
+                                <i class="fa fa-industry me-1" title="Fournisseur"/><field name="partner_id"/>
+                            </div>
+                            <div t-if="record.port.raw_value" class="text-muted">
+                                <i class="fa fa-anchor me-1" title="Port"/><field name="port"/>
                             </div>
                             <div class="mt-1">
                                 <span class="me-3">
@@ -156,6 +172,9 @@
                 <field name="name" string="N° de conteneur"/>
                 <field name="line_ids" string="Contenu (description)"
                        filter_domain="[('line_ids.description', 'ilike', self)]"/>
+                <field name="partner_id" string="Fournisseur"/>
+                <field name="forwarder_id" string="Transitaire"/>
+                <field name="port"/>
                 <field name="notes"/>
                 <separator/>
                 <filter name="filter_in_transit" string="En route"
@@ -179,6 +198,12 @@
                 <group>
                     <filter name="group_state" string="Statut"
                             context="{'group_by': 'state'}"/>
+                    <filter name="group_partner" string="Fournisseur"
+                            context="{'group_by': 'partner_id'}"/>
+                    <filter name="group_forwarder" string="Transitaire"
+                            context="{'group_by': 'forwarder_id'}"/>
+                    <filter name="group_port" string="Port"
+                            context="{'group_by': 'port'}"/>
                     <filter name="group_departure_month" string="Mois de départ"
                             context="{'group_by': 'departure_date:month'}"/>
                     <filter name="group_expected_month" string="Mois d'arrivée prévue"

@@ -37,6 +37,11 @@ class ContainerTracking(models.Model):
         string='Jours restants', compute='_compute_days_left')
     is_late = fields.Boolean(string='En retard', compute='_compute_days_left')
     color = fields.Integer(string='Couleur', compute='_compute_color')
+    partner_id = fields.Many2one(
+        'res.partner', string='Fournisseur', tracking=True, index=True)
+    forwarder_id = fields.Many2one(
+        'res.partner', string='Transitaire', tracking=True, index=True)
+    port = fields.Char(string='Port', tracking=True)
     notes = fields.Text(string='Notes')
     company_id = fields.Many2one(
         'res.company', string='Société', default=lambda self: self.env.company)
