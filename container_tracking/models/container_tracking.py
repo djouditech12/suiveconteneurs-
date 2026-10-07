@@ -4,51 +4,51 @@ from odoo.exceptions import ValidationError
 
 class ContainerTracking(models.Model):
     _name = 'container.tracking'
-    _description = 'Conteneur'
+    _description = 'Container'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'expected_arrival_date asc, id desc'
 
     name = fields.Char(
-        string='N° de conteneur', required=True, copy=False, tracking=True,
+        string='Container No.', required=True, copy=False, tracking=True,
         index=True)
     departure_date = fields.Date(
-        string='Date de départ de Chine', required=True, tracking=True,
+        string='Departure Date (China)', required=True, tracking=True,
         default=fields.Date.context_today)
     expected_arrival_date = fields.Date(
-        string="Date d'arrivée prévue", required=True, tracking=True)
+        string='Expected Arrival Date', required=True, tracking=True)
     actual_arrival_date = fields.Date(
-        string="Date d'arrivée réelle", copy=False, tracking=True)
+        string='Actual Arrival Date', copy=False, tracking=True)
     state = fields.Selection(
-        [('in_transit', 'En route'), ('arrived', 'Arrivé')],
-        string='Statut', default='in_transit', required=True,
+        [('in_transit', 'In Transit'), ('arrived', 'Arrived')],
+        string='Status', default='in_transit', required=True,
         tracking=True, copy=False, index=True, group_expand='_group_expand_states')
     line_ids = fields.One2many(
-        'container.tracking.line', 'container_id', string='Contenu', copy=True)
+        'container.tracking.line', 'container_id', string='Content', copy=True)
     qty_bags = fields.Integer(
-        string='Total sacs', compute='_compute_quantities', store=True)
+        string='Total Bags', compute='_compute_quantities', store=True)
     qty_shoes = fields.Integer(
-        string='Total chaussures', compute='_compute_quantities', store=True)
+        string='Total Shoes', compute='_compute_quantities', store=True)
     total_qty = fields.Integer(
-        string='Quantité totale (pcs)', compute='_compute_quantities',
+        string='Total Quantity (pcs)', compute='_compute_quantities',
         store=True, tracking=True)
     transit_days = fields.Integer(
-        string='Durée du trajet (jours)', compute='_compute_transit_days')
+        string='Transit Duration (days)', compute='_compute_transit_days')
     days_left = fields.Integer(
-        string='Jours restants', compute='_compute_days_left')
-    is_late = fields.Boolean(string='En retard', compute='_compute_days_left')
-    color = fields.Integer(string='Couleur', compute='_compute_color')
+        string='Days Left', compute='_compute_days_left')
+    is_late = fields.Boolean(string='Late', compute='_compute_days_left')
+    color = fields.Integer(string='Color', compute='_compute_color')
     partner_id = fields.Many2one(
-        'res.partner', string='Fournisseur', tracking=True, index=True)
+        'res.partner', string='Supplier', tracking=True, index=True)
     forwarder_id = fields.Many2one(
-        'res.partner', string='Transitaire', tracking=True, index=True)
+        'res.partner', string='Freight Forwarder', tracking=True, index=True)
     port = fields.Char(string='Port', tracking=True)
     notes = fields.Text(string='Notes')
     company_id = fields.Many2one(
-        'res.company', string='Société', default=lambda self: self.env.company)
+        'res.company', string='Company', default=lambda self: self.env.company)
 
     _name_uniq = models.Constraint(
         'UNIQUE(name, company_id)',
-        'Ce numéro de conteneur existe déjà !',
+        'This container number already exists!',
     )
 
     @api.model
@@ -90,19 +90,19 @@ class ContainerTracking(models.Model):
     def _compute_color(self):
         for rec in self:
             if rec.state == 'arrived':
-                rec.color = 10  # vert
+                rec.color = 10  # green
             elif rec.is_late:
-                rec.color = 1  # rouge
+                rec.color = 1  # red
             else:
-                rec.color = 4  # bleu
+                rec.color = 4  # blue
 
     @api.constrains('departure_date', 'expected_arrival_date')
     def _check_dates(self):
         for rec in self:
             if (rec.departure_date and rec.expected_arrival_date
                     and rec.expected_arrival_date < rec.departure_date):
-                raise ValidationError(
-                    "La date d'arrivée prévue doit être postérieure à la date de départ.")
+                raise ValidationError(self.env._(
+                    "The expected arrival date must be after the departure date."))
 
     def action_set_arrived(self):
         today = fields.Date.context_today(self)
@@ -116,7 +116,7 @@ class ContainerTracking(models.Model):
         self.write({'state': 'in_transit', 'actual_arrival_date': False})
 
     def write(self, vals):
-        # Cohérence lors du glisser-déposer dans le kanban
+        # Keep dates consistent when a card is dragged in the kanban
         if vals.get('state') == 'arrived' and 'actual_arrival_date' not in vals:
             today = fields.Date.context_today(self)
             for rec in self:
@@ -130,19 +130,19 @@ class ContainerTracking(models.Model):
 
 class ContainerTrackingLine(models.Model):
     _name = 'container.tracking.line'
-    _description = 'Contenu du conteneur'
+    _description = 'Container Content'
     _order = 'id'
 
     container_id = fields.Many2one(
-        'container.tracking', string='Conteneur', required=True,
+        'container.tracking', string='Container', required=True,
         ondelete='cascade', index=True)
     product_type = fields.Selection(
-        [('bag', 'Sacs'), ('shoes', 'Chaussures')],
+        [('bag', 'Bags'), ('shoes', 'Shoes')],
         string='Type', required=True, default='bag')
-    description = fields.Char(string='Description / Modèle')
-    quantity = fields.Integer(string='Quantité (pcs)', required=True, default=1)
+    description = fields.Char(string='Description / Model')
+    quantity = fields.Integer(string='Quantity (pcs)', required=True, default=1)
 
     _quantity_positive = models.Constraint(
         'CHECK(quantity >= 0)',
-        'La quantité ne peut pas être négative.',
+        'Quantity cannot be negative.',
     )

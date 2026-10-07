@@ -1,15 +1,17 @@
 {
-    'name': 'Suivi des Conteneurs',
+    'name': 'Container Tracking',
     'version': '19.0.1.0.0',
     'category': 'Inventory/Logistics',
-    'summary': "Suivi des conteneurs importés de Chine (en route / arrivé)",
+    'icon': '/container_tracking/static/description/icon.png',
+    'summary': 'Track containers imported from China (in transit / arrived)',
     'description': """
-Suivi des conteneurs
-====================
-* Numéro de conteneur, date de départ de Chine, date d'arrivée prévue
-* Contenu : sacs, chaussures, quantité totale de pièces
-* Statuts : En route / Arrivé
-* Vues liste, kanban, calendrier, filtres, regroupements et recherche
+Container Tracking
+==================
+* Container number, departure date from China, expected arrival date
+* Content: bags, shoes, total quantity of pieces
+* Statuses: In Transit / Arrived
+* Supplier, freight forwarder and port (optional)
+* List, kanban and calendar views, filters, grouping and search
 """,
     'author': 'Djoudi Tech',
     'license': 'LGPL-3',

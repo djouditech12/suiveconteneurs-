@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem id="menu_container_root" name="Conteneurs"
+    <menuitem id="menu_container_root" name="Containers"
               web_icon="container_tracking,static/description/icon.png"
               groups="container_tracking.group_container_user" sequence="50"/>
-    <menuitem id="menu_container_tracking" name="Suivi des conteneurs"
+    <menuitem id="menu_container_tracking" name="All Containers"
               parent="menu_container_root" action="container_tracking_action"
               sequence="10"/>
+    <menuitem id="menu_container_arrival_calendar" name="Arrivals Calendar"
+              parent="menu_container_root" action="container_tracking_action_arrival"
+              sequence="20"/>
 </odoo>
