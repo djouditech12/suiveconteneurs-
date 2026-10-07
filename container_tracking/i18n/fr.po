@@ -14,348 +14,433 @@ msgstr ""
 "Plural-Forms: \n"
 "Language: fr\n"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__name
 msgid "Container No."
 msgstr "N° de conteneur"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__departure_date
 msgid "Departure Date (China)"
 msgstr "Date de départ de Chine"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__expected_arrival_date
 msgid "Expected Arrival Date"
 msgstr "Date d'arrivée prévue"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__actual_arrival_date
 msgid "Actual Arrival Date"
 msgstr "Date d'arrivée réelle"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__state
 msgid "Status"
 msgstr "Statut"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__line_ids
 msgid "Content"
 msgstr "Contenu"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__qty_bags
 msgid "Total Bags"
 msgstr "Total sacs"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__qty_shoes
 msgid "Total Shoes"
 msgstr "Total chaussures"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__total_qty
 msgid "Total Quantity (pcs)"
 msgstr "Quantité totale (pcs)"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__transit_days
 msgid "Transit Duration (days)"
 msgstr "Durée du trajet (jours)"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__days_left
 msgid "Days Left"
 msgstr "Jours restants"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__is_late
 msgid "Late"
 msgstr "En retard"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__color
 msgid "Color"
 msgstr "Couleur"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__partner_id
 msgid "Supplier"
 msgstr "Fournisseur"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__forwarder_id
 msgid "Freight Forwarder"
 msgstr "Transitaire"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__port
 msgid "Port"
 msgstr "Port"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__notes
 msgid "Notes"
 msgstr "Notes"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking__company_id
 msgid "Company"
 msgstr "Société"
 
+#. module: container_tracking
 #: model:ir.model.fields.selection,name:container_tracking.selection__container_tracking__state__in_transit
 msgid "In Transit"
 msgstr "En route"
 
+#. module: container_tracking
 #: model:ir.model.fields.selection,name:container_tracking.selection__container_tracking__state__arrived
 msgid "Arrived"
 msgstr "Arrivé"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking_line__container_id
 msgid "Container"
 msgstr "Conteneur"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking_line__product_type
 msgid "Type"
 msgstr "Type"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking_line__description
 msgid "Description / Model"
 msgstr "Description / Modèle"
 
+#. module: container_tracking
 #: model:ir.model.fields,field_description:container_tracking.field_container_tracking_line__quantity
 msgid "Quantity (pcs)"
 msgstr "Quantité (pcs)"
 
+#. module: container_tracking
 #: model:ir.model.fields.selection,name:container_tracking.selection__container_tracking_line__product_type__bag
 msgid "Bags"
 msgstr "Sacs"
 
+#. module: container_tracking
 #: model:ir.model.fields.selection,name:container_tracking.selection__container_tracking_line__product_type__shoes
 msgid "Shoes"
 msgstr "Chaussures"
 
+#. module: container_tracking
 #: model:ir.model.constraint,message:container_tracking.constraint_container_tracking_name_uniq
 msgid "This container number already exists!"
 msgstr "Ce numéro de conteneur existe déjà !"
 
+#. module: container_tracking
 #: model:ir.model.constraint,message:container_tracking.constraint_container_tracking_line_quantity_positive
 msgid "Quantity cannot be negative."
 msgstr "La quantité ne peut pas être négative."
 
+#. module: container_tracking
 #. odoo-python
 #: code:addons/container_tracking/models/container_tracking.py:0
 msgid "The expected arrival date must be after the departure date."
 msgstr "La date d'arrivée prévue doit être postérieure à la date de départ."
 
+#. module: container_tracking
 #: model:ir.module.category,name:container_tracking.module_category_container_tracking
 msgid "Container Tracking"
 msgstr "Suivi des conteneurs"
 
+#. module: container_tracking
 #: model:res.groups.privilege,name:container_tracking.res_groups_privilege_container_tracking
 msgid "Container Tracking"
 msgstr "Suivi des conteneurs"
 
+#. module: container_tracking
 #: model:res.groups,name:container_tracking.group_container_user
 msgid "User"
 msgstr "Utilisateur"
 
+#. module: container_tracking
 #: model:res.groups,name:container_tracking.group_container_manager
 msgid "Manager"
 msgstr "Responsable"
 
+#. module: container_tracking
 #: model:ir.ui.menu,name:container_tracking.menu_container_root
 msgid "Containers"
 msgstr "Conteneurs"
 
+#. module: container_tracking
 #: model:ir.ui.menu,name:container_tracking.menu_container_tracking
 msgid "All Containers"
 msgstr "Tous les conteneurs"
 
+#. module: container_tracking
 #: model:ir.ui.menu,name:container_tracking.menu_container_arrival_calendar
 msgid "Arrivals Calendar"
 msgstr "Calendrier des arrivées"
 
+#. module: container_tracking
 #: model:ir.actions.act_window,name:container_tracking.container_tracking_action
 msgid "Containers"
 msgstr "Conteneurs"
 
+#. module: container_tracking
 #: model:ir.actions.act_window,name:container_tracking.container_tracking_action_arrival
 msgid "Arrivals Calendar"
 msgstr "Calendrier des arrivées"
 
+#. module: container_tracking
 #: model_terms:ir.actions.act_window,help:container_tracking.container_tracking_action
 msgid "Add your first container"
 msgstr "Ajoutez votre premier conteneur"
 
+#. module: container_tracking
 #: model_terms:ir.actions.act_window,help:container_tracking.container_tracking_action
 msgid "Track your containers from their departure from China to their arrival."
 msgstr "Suivez vos conteneurs depuis leur départ de Chine jusqu'à leur arrivée."
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Container"
 msgstr "Conteneur"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Mark as Arrived"
 msgstr "Marquer comme arrivé"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Back to In Transit"
 msgstr "Remettre en route"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Late"
 msgstr "En retard"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Arrived"
 msgstr "Arrivé"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "e.g. MSKU1234567"
 msgstr "Ex : MSKU1234567"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Dates"
 msgstr "Dates"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Logistics"
 msgstr "Logistique"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Summary"
 msgstr "Résumé"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Total"
 msgstr "Total"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Content"
 msgstr "Contenu"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Notes"
 msgstr "Notes"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_form
 msgid "Remarks, forwarder, bill of lading number..."
 msgstr "Remarques, transitaire, n° de connaissement..."
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_list
 msgid "Containers"
 msgstr "Conteneurs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_list
 msgid "Total bags"
 msgstr "Total sacs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_list
 msgid "Total shoes"
 msgstr "Total chaussures"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_list
 msgid "Total pcs"
 msgstr "Total pcs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Late"
 msgstr "En retard"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Departure"
 msgstr "Départ"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Supplier"
 msgstr "Fournisseur"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Port"
 msgstr "Port"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Bags"
 msgstr "Sacs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Shoes"
 msgstr "Chaussures"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "Total:"
 msgstr "Total :"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_kanban
 msgid "pcs"
 msgstr "pcs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_calendar
 msgid "Containers Calendar"
 msgstr "Calendrier des conteneurs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_calendar_arrival
 msgid "Arrivals Calendar"
 msgstr "Calendrier des arrivées"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Search Containers"
 msgstr "Rechercher un conteneur"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Container No."
 msgstr "N° de conteneur"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Content (description)"
 msgstr "Contenu (description)"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Supplier"
 msgstr "Fournisseur"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Freight Forwarder"
 msgstr "Transitaire"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "In Transit"
 msgstr "En route"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Arrived"
 msgstr "Arrivé"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Late"
 msgstr "En retard"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Contains bags"
 msgstr "Contient des sacs"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Contains shoes"
 msgstr "Contient des chaussures"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Departure Date"
 msgstr "Date de départ"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Expected Arrival"
 msgstr "Arrivée prévue"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Actual Arrival"
 msgstr "Arrivée réelle"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Status"
 msgstr "Statut"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Port"
 msgstr "Port"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Departure Month"
 msgstr "Mois de départ"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Expected Arrival Month"
 msgstr "Mois d'arrivée prévue"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Expected Arrival Week"
 msgstr "Semaine d'arrivée prévue"
 
+#. module: container_tracking
 #: model_terms:ir.ui.view,arch_db:container_tracking.container_tracking_view_search
 msgid "Actual Arrival Month"
 msgstr "Mois d'arrivée réelle"
-
